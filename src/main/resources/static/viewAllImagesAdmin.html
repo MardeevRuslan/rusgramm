@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View All Images</title>
+</head>
+<body>
+<h1>Images</h1>
+<div th:if="${not #lists.isEmpty(images)}">
+  <div th:each="image : ${images}">
+    <p th:text="'Author: ' + ${image.owner.username}"></p> <!-- Display username of the owner -->
+    <img th:src="'data:image/jpeg;base64,' + ${#strings.arrayEncode(image.image)}" th:alt="${image.name}" width="200">
+    <a th:href="'/deleteImageAdmin?id=' + ${image.id}">Delete</a> <!-- Link to delete image -->
+    <br>
+  </div>
+  <!-- Pagination Links -->
+  <div th:if="${images.size() > 10}">
+    <a th:if="${page > 0}" th:href="'/viewAllImages?page=' + ${page - 1}">Previous Page</a>
+    <span th:text="${page + 1}"></span> <!-- Display current page -->
+    <a th:if="${not #lists.isEmpty(nextPageImages)}" th:href="'/viewAllImages?page=' + ${page + 1}">Next Page</a>
+  </div>
+  <a th:href="'/dashboard'">Go to Dashboard</a> <!-- Link to dashboard -->
+</div>
+<div th:if="${#lists.isEmpty(images)}">
+  <p>No images found.</p>
+</div>
+</body>
+</html>

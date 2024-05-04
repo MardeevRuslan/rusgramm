@@ -14,10 +14,10 @@
         <br>
     </div>
     <!-- Pagination Links -->
-    <div>
+    <div th:if="${images.size() > 10}">
         <a th:if="${page > 0}" th:href="'/viewAllImages?page=' + ${page - 1}">Previous Page</a>
         <span th:text="${page + 1}"></span> <!-- Display current page -->
-        <a th:if="${not #lists.isEmpty(images)}" th:href="'/viewAllImages?page=' + ${page + 1}">Next Page</a>
+        <a th:if="${not #lists.isEmpty(nextPageImages)}" th:href="'/viewAllImages?page=' + ${page + 1}">Next Page</a>
     </div>
     <a th:href="'/dashboard'">Go to Dashboard</a> <!-- Link to dashboard -->
 </div>

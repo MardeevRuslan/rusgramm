@@ -22,7 +22,7 @@ public class ImageService {
     public String upload(String username, MultipartFile image)  {
         if (image.isEmpty() || image.getSize() > 5 * 1024 * 1024) {
             return null;}
-        User user = new User(username, null);
+        User user = new User(username, null, null);
         imageRepository.save(new Image(user, image.getOriginalFilename(), image.getBytes()));
         return "Image uploaded";
     }
