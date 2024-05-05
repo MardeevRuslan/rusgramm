@@ -7,8 +7,17 @@ start:
 	mv target/rusgramm-0.0.1-SNAPSHOT.war ${TOMCAT_HOME}/webapps/rusgramm.war
 	sh ${TOMCAT_HOME}/bin/startup.sh
 	sleep 5
-	#open http://localhost:8080/rusgramm
-	open http://localhost:8080
+	open http://localhost:8080/rusgramm
+
+start-docker:
+	docker-compose up -d
+	mvn clean
+	mvn package -DskipTests
+	mv target/rusgramm-0.0.1-SNAPSHOT.war ${TOMCAT_HOME}/webapps/rusgramm.war
+	sh ${TOMCAT_HOME}/bin/startup.sh
+	sleep 5
+	open http://localhost:8080/rusgramm
+
 
 
 

@@ -1,6 +1,7 @@
 package ru.mardeev.rusgramm.controller;
 
 import lombok.Data;
+import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,11 +34,11 @@ public class ImageController {
     public String viewMyImages(Model model, @RequestParam(defaultValue = "0") int page) {
         String username = (String) model.getAttribute("username");
         int pageSize = 10;
-        List<Image> userImages = imageService.getImages(username, page, pageSize);
+        Page<Image> userImages = imageService.getImages(username, page, pageSize);
         model.addAttribute("images", userImages);
         model.addAttribute("username", username);
         model.addAttribute("page", page);
-        model.addAttribute("hasNextPage", userImages.size() == pageSize);
+        model.addAttribute("hasNextPage", userImages.getSize() == pageSize);
         return "viewMyImages";
     }
 
@@ -45,10 +46,10 @@ public class ImageController {
     @GetMapping("/viewAllImages")
     public String viewAllImages(Model model, @RequestParam(defaultValue = "0") int page) {
         int pageSize = 10;
-        List<Image> images = imageService.getImages(null, page, pageSize);
+        Page<Image> images = imageService.getImages(null, page, pageSize);
         model.addAttribute("images", images);
         model.addAttribute("page", page);
-        model.addAttribute("hasNextPage", images.size() == pageSize);
+        model.addAttribute("hasNextPage", images.getSize() == pageSize);
         return "viewAllImages";
     }
 

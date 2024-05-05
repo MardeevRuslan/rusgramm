@@ -2,6 +2,7 @@ package ru.mardeev.rusgramm.service;
 
 import lombok.Data;
 import lombok.SneakyThrows;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -32,7 +33,7 @@ public class ImageService {
         imageRepository.deleteById(id);
     }
 
-    public List<Image> getImages(String username, int page, int size) {
+    public Page<Image> getImages(String username, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
         return imageRepository.findAllByOwnerName(username, pageable);
     }

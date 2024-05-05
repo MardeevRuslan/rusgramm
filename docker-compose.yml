@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  # Сервис для разворачивания контейнера с базой данных
+  postgres:
+    container_name: postgres
+    image: postgres:12
+    hostname: database
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_DB=rusgramm
+      - POSTGRES_USER=rusgramm
+      - POSTGRES_PASSWORD=rusgramm
+    ports:
+      - "5432:5432"

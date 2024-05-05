@@ -17,10 +17,11 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @ManyToOne
+    @JoinColumn(name = "user_id")
     User owner;
-
+    @Column(name = "image_name", nullable = false)
     String name;
-
+    @Column(name = "image_data", nullable = false)
     byte[] image;
 
     public Image(User owner, String name, byte[] image) {
